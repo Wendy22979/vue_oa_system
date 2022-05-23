@@ -68,6 +68,8 @@
 
 <script>
 import { validMobile } from "@/utils/validate";
+import { mapActions } from "vuex";
+import { login } from '@/api/user';
 
 export default {
   name: "Login",
@@ -109,6 +111,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions("user",["login"]),
     // 密码显示隐藏
     showPwd() {
       if (this.passwordType === "password") {
@@ -122,22 +125,24 @@ export default {
     },
     //登录验证
     handleLogin() {
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.loginForm.validate(async (valid) => {
         if (valid) {
-          this.loading = true;
-          this.$store
-            .dispatch("user/login", this.loginForm)
-            .then(() => {
-              this.$router.push({ path: this.redirect || "/" });
-              this.loading = false;
-            })
-            .catch(() => {
-              this.loading = false;
-            });
+          try{
+            this.loading = true;//请求时来loading
+           await this.login(this.loginForm)  
+           this.$router.push("/")    
+          }catch(error){
+            console.log(error)
+          }finally{
+            this.loading = false;//请求完成关闭loading
+          }        
         } else {
+          // 验证失败
           console.log("error submit!!");
           return false;
         }
+        
+
       });
     },
   },

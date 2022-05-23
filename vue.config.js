@@ -30,14 +30,23 @@ module.exports = {
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
+  // 代理服务器配置
   devServer: {
-    port: port,
-    open: true,
-    overlay: {
-      warnings: false,
-      errors: true
+    proxy: {
+      '/api': {
+        target: 'http://ihrm-java.itheima.net/',
+        ws: true,
+        changeOrigin: true,
+        // pathRewrite:{"^/api":""}//因为后端接口就是ihrm-java.itheima.net/api这种格式,所以不需要重写
+      },
+      // port: port,
+      // open: true,
+      // overlay: {
+      //   warnings: false,
+      //   errors: true
+      // },
+      // before: require('./mock/mock-server.js')
     },
-    // before: require('./mock/mock-server.js')
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

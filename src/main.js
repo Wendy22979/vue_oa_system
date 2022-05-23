@@ -12,8 +12,16 @@ import App from './App'
 import store from './store'
 import router from './router'
 
+import * as directive from "@/directive" //引入自定义指令
+
 import '@/icons' // icon
-import '@/permission' // permission control
+import '@/permission' // permission权限管理
+
+
+// 全局注册自定义指令
+for(let key in directive){
+  Vue.directive(key,directive[key])
+}
 
 /**
  * If you don't want to use mock-server

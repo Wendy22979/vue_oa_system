@@ -27,6 +27,7 @@
 
     .scrollbar-wrapper {
       overflow-x: hidden !important;
+      background:url('~@/assets/common/leftnavBg.png') no-repeat 0 100% ;
     }
 
     .el-scrollbar__bar.is-vertical {
@@ -66,6 +67,20 @@
       border: none;
       height: 100%;
       width: 100% !important;
+      a{
+        li{
+          color:#fff;
+          font-size: 18px;
+          &:hover{
+            background-color: #fff !important;
+            span,.svg-icon{
+             color:  #3d6df8;
+             vertical-align: middle;
+            }
+          }
+          
+        }
+      }
     }
 
     // menu hover
@@ -94,6 +109,7 @@
   .hideSidebar {
     .sidebar-container {
       width: 54px !important;
+      
     }
 
     .main-container {

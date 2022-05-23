@@ -63,6 +63,10 @@ export default {
       position: fixed;
       top: 0;
     }
+    .sidebar-container {
+    // 渐变颜色
+    background: linear-gradient(bottom, #3d6df8, #5b8cff);
+  }
   }
   .drawer-bg {
     background: #000;
