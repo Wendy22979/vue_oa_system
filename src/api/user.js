@@ -19,7 +19,7 @@ export const getUserInfo = () => {
 }
 
 
-// 获取用户头像
+// 获取用户头像,获取员工基本信息
 export const getUserDetailById = (id) => {
   return request({
     url: `/sys/user/${id}`,

@@ -12,16 +12,22 @@ import App from './App'
 import store from './store'
 import router from './router'
 
-import * as directive from "@/directive" //引入自定义指令
+
 
 import '@/icons' // icon
 import '@/permission' // permission权限管理
+// 打印插件
+import Print from 'vue-print-nb'
+Vue.use(Print)
 
 
-// 全局注册自定义指令
-for(let key in directive){
-  Vue.directive(key,directive[key])
-}
+import plugins from './plugins'//自定义插件
+Vue.use(plugins)
+
+
+
+
+
 
 /**
  * If you don't want to use mock-server

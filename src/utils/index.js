@@ -115,3 +115,25 @@ export function param2Obj(url) {
   })
   return obj
 }
+
+
+// 将列表型的数据转化成树形数据,组织架构中使用,将部门分类，递归用法
+/* 
+list需要处理的列表
+rootvalue 比对条件,初始为pid
+*/
+export const tranListToTreeData = (list,rootvalue) => {
+  var arr = []//存储每个data
+  list.forEach((item)=>{
+    //判断找到一代节点，添加进数组
+    if(item.pid === rootvalue){
+      //每找到一个子一代节点，就遍历一下list，找相应的下一代节点，找完后在进行下一次循环
+      let children = tranListToTreeData(list,item.id)
+      // 将找到的下一代存储在上一代的children属性中
+      item.children = children 
+      //将item存入数组
+      arr.push(item)
+    }
+  })
+  return arr
+}
