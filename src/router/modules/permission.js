@@ -6,6 +6,7 @@ export default {
   children:[
     {
       path:"",//二级路由默认值
+      name:"permissions",
       component:()=>import("@/views/permission"),
       meta:{
         title:"权限管理",

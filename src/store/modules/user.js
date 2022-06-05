@@ -1,5 +1,6 @@
 import {login,getUserInfo,getUserDetailById} from "@/api/user"
 import {getToken,setToken,removeToken,getTimeStamp,setTimeStamp} from  "@/utils/auth"
+import {resetRouter} from "@/router"
 import { get } from "js-cookie"
 
 const getDefaultState = () => {
@@ -42,6 +43,7 @@ const actions = {
       let result = await login(data)
       commit('SET_TOKEN',result)
       setTimeStamp()//存储时间戳
+      return result
     }catch(error){
       console.log(error)
     }
@@ -68,6 +70,10 @@ const actions = {
   commit("REMOVE_TOKEN")
   // 删除用户资料
   commit("REMOVE_USER_INFO")
+  // 重置路由
+  resetRouter()
+  // 清除vuex中的路由数据
+  commit("permission/SET_ROUTER",[],{root:true})
 
   }
 

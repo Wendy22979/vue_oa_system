@@ -52,11 +52,10 @@ export const constantRoutes = [
       }
     ]
   },
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+//  404页面放在动态路由后面了
 ]
 
-// 动态路由
+// 所有动态改变的路由
 export const asyncRoutes = [
   approvalsRouter,
   attendancesRouter,
@@ -71,12 +70,12 @@ export const asyncRoutes = [
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: [...constantRoutes,...asyncRoutes]
+  routes: [...constantRoutes]
 })
 
 const router = createRouter()
 
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+// 重置路由函数
 export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router

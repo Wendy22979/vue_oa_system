@@ -17,9 +17,16 @@ router.beforeEach( async(to,from,next)=>{
       next("/")
     }else { //登录后其他页面跳转就直接放行
      if (!store.state.user.userInfo.userId) {
-      await store.dispatch('user/getUserInfo')
-     }
+     let {roles:{menus}}=  await store.dispatch('user/getUserInfo')
+    //  获取的动态路由
+     let routes = await store.dispatch("permission/setRoutes",menus)
+     console.log(routes)
+      //  添加动态路由
+      router.addRoutes([...routes,{ path: '*', redirect: '/404', hidden: true }])
+      next(to.path)
+     }else{
       next()
+     }
     }
 
   }else {

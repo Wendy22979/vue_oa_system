@@ -6,6 +6,7 @@ export default {
   children:[
     {
       path:"",//二级路由默认值
+      name:"salarys",
       component:()=>import("@/views/salarys"),
       meta:{
         title:"工资",

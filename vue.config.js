@@ -34,7 +34,8 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://ihrm-java.itheima.net/',
+        target: "http://ihrm.itheima.net/",
+        // target: 'http://ihrm-java.itheima.net/',
         ws: true,
         changeOrigin: true,
         // pathRewrite:{"^/api":""}//因为后端接口就是ihrm-java.itheima.net/api这种格式,所以不需要重写

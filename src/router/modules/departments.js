@@ -6,6 +6,7 @@ export default {
   children:[
     {
       path:"",//二级路由默认值
+      name:"departments",
       component:()=>import("@/views/departments"),
       meta:{
         title:"组织架构",

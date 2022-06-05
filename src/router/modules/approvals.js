@@ -5,6 +5,7 @@ export default {
   component:Layout,
   children:[{
     path:"",//二级路由默认值
+    name:"approvals",
     component:()=>import("@/views/approvals"),
     meta:{
       title:"审批",

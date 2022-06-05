@@ -12,7 +12,9 @@ import App from './App'
 import store from './store'
 import router from './router'
 
-
+//全局混入
+import mixin from "@/mixin"
+Vue.mixin(mixin)
 
 import '@/icons' // icon
 import '@/permission' // permission权限管理

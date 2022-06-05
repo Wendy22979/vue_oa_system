@@ -6,6 +6,7 @@ export default {
   children:[
     {
       path:"",//二级路由默认值
+      name:"attendances",
       component:()=>import("@/views/attendances"),
       meta:{
         title:"考勤",
