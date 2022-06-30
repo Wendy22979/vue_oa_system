@@ -48,7 +48,6 @@ export default {
         });
         let workSheet = workBook.Sheets[workBook.SheetNames[0]];
         const data = xlsx.utils.sheet_to_json(workSheet);
-        console.log(data);
         //将读取的数据的属性名做一个处理，然后返回
         this.results = this.onSuccess(data);
       } else {

@@ -57,3 +57,8 @@ new Vue({
   store,
   render: h => h(App)
 })
+
+// const app = createApp(App);
+// app.use(router);
+// app.use(store);
+// app.mount('#app');
