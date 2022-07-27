@@ -4,24 +4,24 @@
       <el-tabs>
         <el-tab-pane label="登录账号设置">
           <el-form
+            ref="ruleForm"
             label-width="120px"
             style="margin-left: 120px; margin-top: 30px"
             :model="userInfo"
             :rules="rules"
-            ref="ruleForm"
           >
             <el-form-item label="姓名" prop="username">
               <el-input
-                style="width: 300px"
                 v-model="userInfo.username"
-              ></el-input>
+                style="width: 300px"
+              />
             </el-form-item>
             <el-form-item label="密码" prop="password">
               <el-input
+                v-model="userInfo.password2"
                 style="width: 300px"
                 type="password2"
-                v-model="userInfo.password2"
-              ></el-input>
+              />
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="upDate">更新</el-button>
@@ -45,65 +45,65 @@
 </template>
 
 <script>
-import { getUserDetailById } from "@/api/user";
-import { saveUserDetailById } from "@/api/employees";
-import UserInfo from "@/views/employees/detail/component/userInfo";
-import JobInfo from "@/views/employees/detail/component/jobInfo";
+import { getUserDetailById } from '@/api/user'
+import { saveUserDetailById } from '@/api/employees'
+import UserInfo from '@/views/employees/detail/component/userInfo'
+import JobInfo from '@/views/employees/detail/component/jobInfo'
 export default {
-  name: "detail",
+  name: 'Detail',
   components: {
     UserInfo,
-    JobInfo,
+    JobInfo
   },
   data() {
     return {
-      userId: this.$route.query.id, //用户id
+      userId: this.$route.query.id, // 用户id
       userInfo: {
-        //用户
-        username: "",
-        password2: "", //传过来的密码为超过十二位加密密码，如果不修改密码直接提交会报错，校验失败，所以用password2来中转，如果更改则将password2值赋给password
+        // 用户
+        username: '',
+        password2: '' // 传过来的密码为超过十二位加密密码，如果不修改密码直接提交会报错，校验失败，所以用password2来中转，如果更改则将password2值赋给password
       },
       rules: {
         username: [
-          { require: true, message: "用户名不能为空", trigger: "blur" },
+          { require: true, message: '用户名不能为空', trigger: 'blur' }
         ],
         password2: [
-          { require: true, message: "用户名不能为空", trigger: "blur" },
-          { min: 6, main: 9, message: "密码长度为6到9位", trigger: "blur" },
-        ],
-      },
-    };
+          { require: true, message: '用户名不能为空', trigger: 'blur' },
+          { min: 6, main: 9, message: '密码长度为6到9位', trigger: 'blur' }
+        ]
+      }
+    }
+  },
+  created() {
+    // 获取用户信息
+    this.getUserDetailById()
   },
   methods: {
     // 获取员工基本信息
     async getUserDetailById() {
-      this.userInfo = await getUserDetailById(this.userId);
+      this.userInfo = await getUserDetailById(this.userId)
     },
     // 点击更新验证信息
     upDate() {
       try {
-        this.$refs["ruleForm"].validate(async (isOk) => {
+        this.$refs['ruleForm'].validate(async(isOk) => {
           if (isOk) {
             await saveUserDetailById({
               ...this.userInfo,
-              password: this.userInfo.password2,
-            });
-            this.$message.success("更新成功");
+              password: this.userInfo.password2
+            })
+            this.$message.success('更新成功')
           } else {
-            console.log("error submit!!");
-            return false;
+            console.log('error submit!!')
+            return false
           }
-        });
+        })
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    },
-  },
-  created() {
-    // 获取用户信息
-    this.getUserDetailById();
-  },
-};
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

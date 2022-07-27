@@ -4,16 +4,16 @@
       <el-row type="flex" justify="space-between" align="middle">
         <el-col>
           <div v-if="isShow" class="left">
-            <i class="el-icon-info"></i>
-             <slot name="before"></slot>
+            <i class="el-icon-info" />
+            <slot name="before" />
           </div>
         </el-col>
         <el-col :span="4">
           <el-row type="flex" justify="end">
-          <slot name="after">
+            <slot name="after">
             <!-- 添加左侧按钮 -->
-          </slot>
-        </el-row>
+            </slot>
+          </el-row>
         </el-col>
       </el-row>
     </el-card>
@@ -22,14 +22,14 @@
 
 <script>
 export default {
-  name: "PageTools",
+  name: 'PageTools',
   props: {
     isShow: {
       type: Boolean,
-      default: true,
-    },
-  },
-};
+      default: true
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

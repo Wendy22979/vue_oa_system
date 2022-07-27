@@ -6,7 +6,6 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 
-
 // 动态路由引入
 import approvalsRouter from '@/router/modules/approvals'
 import attendancesRouter from '@/router/modules/attendances'
@@ -36,23 +35,26 @@ export const constantRoutes = [
     redirect: '/dashboard',
     children: [{
       path: 'dashboard',
-      name: 'Dashboard',
+      name: 'dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '首页', icon: 'dashboard' }
     }]
   },
   {
-    path:"/import",
-    component:Layout,
-    hidden:true,//不显示在左侧菜单栏中
-    children:[
+    path: '/import',
+    component: Layout,
+    hidden: true, // 不显示在左侧菜单栏中
+    children: [
       {
-        path:"/",//默认二级路由
-        component:()=>import("@/views/import"),
+        path: '/', // 默认二级路由
+        component: () => import('@/views/import/index.vue'),
+        meta: {
+          title: '文件上传'
+        }
       }
     ]
-  },
-//  404页面放在动态路由后面了
+  }
+//  404页面放在动态路由后面了，搜索不到转入404页面
 ]
 
 // 所有动态改变的路由

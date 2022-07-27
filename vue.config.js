@@ -19,7 +19,7 @@ const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 // let externals
 // let cdn = {}
 // if (isProduction) {
-//   externals = {     
+//   externals = {
 //     //配置排除打包文件
 //     //格式：包名：引入时变量名
 //    //例：import ElementUI（变量名） from 'element-ui'（包名）
@@ -61,12 +61,12 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: "http://ihrm.itheima.net/",
-        // target: 'http://ihrm-java.itheima.net/',
+        // target: 'http://ihrm.itheima.net/',
+        target: 'http://ihrm-java.itheima.net/',
         ws: true,
-        changeOrigin: true,
+        changeOrigin: true
         // pathRewrite:{"^/api":""}//因为后端接口就是ihrm-java.itheima.net/api这种格式,所以不需要重写
-      },
+      }
       // port: port,
       // open: true,
       // overlay: {
@@ -74,7 +74,7 @@ module.exports = {
       //   errors: true
       // },
       // before: require('./mock/mock-server.js')
-    },
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
@@ -89,15 +89,13 @@ module.exports = {
   },
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
-    config.plugin('preload').tap(() => [
-      {
-        rel: 'preload',
-        // to ignore runtime.js
-        // https://github.com/vuejs/vue-cli/blob/dev/packages/@vue/cli-service/lib/config/app.js#L171
-        fileBlacklist: [/\.map$/, /hot-update\.js$/, /runtime\..*\.js$/],
-        include: 'initial'
-      }
-    ])
+    config.plugin('preload').tap(() => [{
+      rel: 'preload',
+      // to ignore runtime.js
+      // https://github.com/vuejs/vue-cli/blob/dev/packages/@vue/cli-service/lib/config/app.js#L171
+      fileBlacklist: [/\.map$/, /hot-update\.js$/, /runtime\..*\.js$/],
+      include: 'initial'
+    }])
 
     //     //  注入cdn变量
     // // 这行代码 会在执行打包的时候 执行 就会将cdn变量注入到 html模板中
@@ -134,7 +132,7 @@ module.exports = {
             .plugin('ScriptExtHtmlWebpackPlugin')
             .after('html')
             .use('script-ext-html-webpack-plugin', [{
-            // `runtime` must same as runtimeChunk name. default is `runtime`
+              // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
             }])
             .end()

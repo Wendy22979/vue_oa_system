@@ -1,6 +1,5 @@
 import request from '@/utils/request'
 
-
 // 登录接口
 export function login(data) {
   return request({
@@ -14,19 +13,16 @@ export function login(data) {
 export const getUserInfo = () => {
   return request({
     url: '/sys/profile',
-    method: 'post',
+    method: 'post'
   })
 }
-
 
 // 获取用户头像,获取员工基本信息
 export const getUserDetailById = (id) => {
   return request({
-    url: `/sys/user/${id}`,
+    url: `/sys/user/${id}`
   })
 }
-
-
 
 // export function getInfo(token) {
 //   return request({
