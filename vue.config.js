@@ -8,40 +8,35 @@ function resolve(dir) {
 
 const name = defaultSettings.title || 'vue Admin Template' // page title
 
-// If your port is set to 80,
-// use administrator privileges to execute the command line.
-// For example, Mac: sudo npm run
-// You can change the port by the following methods:
-// port = 9528 npm run dev OR npm run dev --port = 9528
 // 端口设置
 const port = process.env.port || process.env.npm_config_port || 9528 // dev port
-// const isProduction = process.env.NODE_ENV === 'production' // 判断是否是生产环境
-// let externals
-// let cdn = {}
-// if (isProduction) {
-//   externals = {
-//     //配置排除打包文件
-//     //格式：包名：引入时变量名
-//    //例：import ElementUI（变量名） from 'element-ui'（包名）
-//       // 'vue': 'Vue',
-//       // 'element-ui': 'ElementUI',
-//       // 'xlsx': 'XLSX'
-//     }
-//     cdn = {
-//       css: [
-//         // element-ui css
-//         // 'https://unpkg.com/element-ui/lib/theme-chalk/index.css' // 样式表
-//       ],
-//       js: [
-//         // vue must at first!
-//         // 'https://unpkg.com/vue/dist/vue.js', // vuejs
-//         // element-ui js
-//         // 'https://unpkg.com/element-ui/lib/index.js', // elementUI
-//           // 'https://cdn.jsdelivr.net/npm/xlsx@0.16.6/dist/jszip.min.js',
-//         // 'https://cdn.jsdelivr.net/npm/xlsx@0.16.6/dist/xlsx.full.min.js'
-//       ]
-//     }
-// }
+const isProduction = process.env.NODE_ENV === 'production' // 判断是否是生产环境
+let externals
+let cdn = {}
+if (isProduction) {
+  externals = {
+    // 配置排除打包文件
+    // 格式：包名：引入时变量名
+    // 例：import ElementUI（变量名） from 'element-ui'（包名）
+    // 'vue': 'Vue',
+    // 'element-ui': 'ElementUI',
+    // 'xlsx': 'XLSX'
+  }
+  cdn = {
+    css: [
+      // element-ui css
+      // 'https://unpkg.com/element-ui/lib/theme-chalk/index.css' // 样式表
+    ],
+    js: [
+      // vue must at first!
+      // 'https://unpkg.com/vue/dist/vue.js', // vuejs
+      // element-ui js
+      // 'https://unpkg.com/element-ui/lib/index.js', // elementUI
+      // 'https://cdn.jsdelivr.net/npm/xlsx@0.16.6/dist/jszip.min.js',
+      // 'https://cdn.jsdelivr.net/npm/xlsx@0.16.6/dist/xlsx.full.min.js'
+    ]
+  }
+}
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
@@ -80,7 +75,7 @@ module.exports = {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
     name: name,
-    // externals,
+    externals,
     resolve: {
       alias: {
         '@': resolve('src')
@@ -99,11 +94,11 @@ module.exports = {
 
     //     //  注入cdn变量
     // // 这行代码 会在执行打包的时候 执行 就会将cdn变量注入到 html模板中
-    // config.plugin('html').tap((args) => {
-    //   // args 是注入html模板的一个变量
-    //   args[0].cdn = cdn // 后面的cdn就是定义的变量
-    //   return args // 需要返回这个参数
-    // })
+    config.plugin('html').tap((args) => {
+      // args 是注入html模板的一个变量
+      args[0].cdn = cdn // 后面的cdn就是定义的变量
+      return args // 需要返回这个参数
+    })
 
     // when there are many pages, it will cause too many meaningless requests
     config.plugins.delete('prefetch')
